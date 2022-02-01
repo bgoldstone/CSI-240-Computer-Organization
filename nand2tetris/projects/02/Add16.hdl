@@ -14,8 +14,8 @@ CHIP Add16 {
 
     PARTS:
    // Put you code here:
-   //Out1 placeholder
-   HalfAdder(a=a[0], b=b[0], sum=out1, carry=carry1);
+   // Out1 placeholder for out[0]
+   HalfAdder(a=a[0], b=b[0], sum=out0, carry=carry1);
    FullAdder(a=a[1], b=b[1], c=carry1, sum=out[1], carry=carry2);
    FullAdder(a=a[2], b=b[2], c=carry2, sum=out[2], carry=carry3);
    FullAdder(a=a[3], b=b[3], c=carry3, sum=out[3], carry=carry4);
@@ -31,6 +31,8 @@ CHIP Add16 {
    FullAdder(a=a[13], b=b[13], c=carry13, sum=out[13], carry=carry14);
    FullAdder(a=a[14], b=b[14], c=carry14, sum=out[14], carry=carry15);
    FullAdder(a=a[15], b=b[15], c=carry15, sum=out[15], carry=carry16);
+   
+   // checks for carry value
    Not(in=carry16, out=notCarry16);
-   And(a=out1, b=notCarry16, out=out[0]);
+   And(a=out0, b=notCarry16, out=out[0]);
 }
