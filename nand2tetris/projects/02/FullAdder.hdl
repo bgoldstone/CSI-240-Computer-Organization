@@ -18,7 +18,7 @@ CHIP FullAdder {
     // Put you code here:
     //a,b sum = 0 carry =1
     HalfAdder(a=a, b=b, sum=sumAB, carry=carryAB);
-    HalfAdder(a=c, b=sumAB, sum=sum, carry=carryABC);
+    HalfAdder(a=c, b=sumAB, sum=sum, carry=carryBC);
     //sumAB,carryAB sum=1 carry=0
-    Xor(a=carryAB, b=carryABC, out=carry);    
+    Xor(a=carryAB, b=carryBC, out=carry);    
 }
