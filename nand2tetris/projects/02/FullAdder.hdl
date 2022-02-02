@@ -18,12 +18,7 @@ CHIP FullAdder {
     // Put you code here:
     //a,b sum = 0 carry =1
     HalfAdder(a=a, b=b, sum=sumAB, carry=carryAB);
-    //sumAB,carryAB sum=1 carry=0
-    Xor(a=sumAB, b=c, out=sum);
-    And(a=a, b=c, out=carryAC);
-    And(a=b, b=c, out=carryBC);
-    //compares all AB, AC, and BC combinations.
-    Or(a=carryAB, b=carryAC, out=carryABAC);
-    Or(a=carryBC, b=carryABAC, out=carry);
+    HalfAdder(a=c, b=sumAB, sum=sum, carry=carry1);
+    And(a=carry1, b=carryAB, out=carry);
     
 }
