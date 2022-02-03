@@ -35,12 +35,10 @@ CHIP ALU {
         ny, // negate the y input?
         f,  // compute out = x + y (if 1) or x & y (if 0)
         no; // negate the out output?
-
     OUT 
         out[16], // 16-bit output
         zr, // 1 if (out == 0), 0 otherwise
         ng; // 1 if (out < 0),  0 otherwise
-
     PARTS:
     //zx
     Mux16(a=x,b=false,sel=zx,out=zxMux);
@@ -68,5 +66,4 @@ CHIP ALU {
     Or8Way(in=notNxnyAndAdd2,out=notNxnyAndAddOr2);
     Or(a=notNxnyAndAddOr1,b=notNxnyAndAddOr2,out=notNxnyAndAddOr);
     Not(in=notNxnyAndAddOr,out=zr);
-
 }
