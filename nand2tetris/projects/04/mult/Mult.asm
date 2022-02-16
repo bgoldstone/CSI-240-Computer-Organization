@@ -10,3 +10,27 @@
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
 // Put your code here.
+@2
+M=0 //R2=0
+@i
+M=0
+(LOOP)
+    //while loop
+    @i
+    D=M
+    @0
+    D=D-M //while i-R1 > 0
+    @END
+    D;JGE
+    //incrementation
+    @1
+    D=M
+    @2
+    M=D+M
+    @i
+    M=M+1 //i++
+    @LOOP
+    0;JMP
+(END)
+    @END
+    0;JMP
