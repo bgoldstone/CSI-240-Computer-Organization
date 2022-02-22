@@ -9,6 +9,7 @@
 // This program only needs to handle arguments that satisfy
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
+//Got help from https://github.com/havivha/Nand2Tetris/
 // Put your code here.
 @2
 M=0 //R2=0
