@@ -15,22 +15,22 @@
 //implemented using https://github.com/havivha/Nand2Tetris/
 //Page 14
     @status
-    M=-1        // status=0xFFFF
+    M=-1        // status=-1
     D=0         // Argument - what to set screen bits to
     @SETSCREEN
-    0;JMP
+    0;JMP       //GOTO SETSCREEN
 
 (LOOP)
     @KBD
     D=M         // D = current keyboard character
     @SETSCREEN
-    D;JEQ       // If no key, set screen to zeroes (white)
-    D=-1        // If key pressed, set screen to all 1 bits (black)
+    D;JEQ       // If no key, set screen to 0
+    D=-1        // If key pressed, set screen to 1
     
-(SETSCREEN)     // Set D=new status before jumping here
+(SETSCREEN)     // Sets status from arguments
     @ARG
     M=D         // Save new status arg
-    @status     // FFFF=black, 0=white - status of entire screen
+    @status     // Status of entire screen
     D=D-M       // D=newstatus-status
     @LOOP
     D;JEQ        // Do nothing if new status == old status
@@ -43,21 +43,21 @@
     @SCREEN
     D=A         // D=Screen address
     @8192
-    D=D+A       // D=Byte just past last screen address
+    D=D+A       // 1 bit past screen address
     @i
-    M=D         // i=SCREEN address
+    M=D         // assign i to screen address
     
 (SETLOOP)    
     @i
     D=M-1
     M=D         // i=i-1
     @LOOP
-    D;JLT       // if i<0 goto LOOP
+    D;JLT       // if i<0 GOTO LOOP
     
     @status
     D=M         // D=status
     @i
-    A=M         // Indirect
+    A=M
     M=D         // M[current screen address]=status
     @SETLOOP
-    0;JMP
+    0;JMP //GOTO SETLOOP
