@@ -24,8 +24,8 @@
     @KBD
     D=M         // D = current keyboard character
     @SETSCREEN
-    D;JEQ       // If no key, set screen to 0
-    D=-1        // If key pressed, set screen to 1
+    D;JEQ       //Jump to Setscreen if value of keyboard input is 0
+    D=-1        //Set KBD = -1
     
 (SETSCREEN)     // Sets status from arguments
     @ARG
@@ -33,12 +33,12 @@
     @status     // Status of entire screen
     D=D-M       // D=newstatus-status
     @LOOP
-    D;JEQ        // Do nothing if new status == old status
+    D;JEQ        // Jump if status == 0
     
     @ARG
-    D=M
+    D=M         //Puts ARG into Data memory
     @status
-    M=D         // status = ARG
+    M=D         // saves status memory with ARG
     
     @SCREEN
     D=A         // D=Screen address
@@ -49,15 +49,15 @@
     
 (SETLOOP)    
     @i
-    D=M-1
-    M=D         // i=i-1
+    D=M-1       //puts i-1 in data memory
+    M=D         // i= data memory
     @LOOP
-    D;JLT       // if i<0 GOTO LOOP
+    D;JLT       // if i<0 Jump to LOOP
     
     @status
     D=M         // D=status
     @i
-    A=M
-    M=D         // M[current screen address]=status
+    A=M         //new i = previous i
+    M=D         //previous i = data register
     @SETLOOP
-    0;JMP //GOTO SETLOOP
+    0;JMP //Goto SETLOOP

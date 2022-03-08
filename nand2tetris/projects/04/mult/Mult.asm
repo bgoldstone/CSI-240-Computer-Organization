@@ -13,25 +13,26 @@
 // Put your code here.
 @2
 M=0 //R2=0
+//set i to 0
 @i
 M=0
 (LOOP)
     //while loop
     @i
-    D=M
+    D=M //put i in data memory
     @0
-    D=D-M //while i-R1 > 0
+    D=D-M //i - R0
     @END
-    D;JGE
+    D;JGE //if D >= 0 Jump to end
     //incrementation
     @1
-    D=M
+    D=M //D=1
     @2
-    M=D+M
+    M=M+D // R2 = R2 + 1
     @i
     M=M+1 //i++
     @LOOP
-    0;JMP
+    0;JMP //JUMP to LOOP
 (END)
-    @END
+    @END //BREAK PROGRAM
     0;JMP
