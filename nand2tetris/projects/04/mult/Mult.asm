@@ -23,12 +23,12 @@ M=0
     @0
     D=D-M //D = i - R0
     @END
-    D;JGE //if D >= 0 Jump to end
+    D;JGE //if i >= R0 Jump to end (if program ran R0 times quit)
     //incrementation
     @1
     D=M //D=R1
     @2
-    M=M+D // R2 = R2 + R1
+    M=M+D // Sum += R1
     @i
     M=M+1 //i++
     @LOOP
