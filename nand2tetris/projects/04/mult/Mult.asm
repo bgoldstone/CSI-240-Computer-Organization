@@ -19,20 +19,20 @@ M=0
 (LOOP)
     //while loop
     @i
-    D=M //put i in data memory
+    D=M //D = i
     @0
-    D=D-M //i - R0
+    D=D-M //D = i - R0
     @END
     D;JGE //if D >= 0 Jump to end
     //incrementation
     @1
-    D=M //D=1
+    D=M //D=R1
     @2
-    M=M+D // R2 = R2 + 1
+    M=M+D // R2 = R2 + R1
     @i
     M=M+1 //i++
     @LOOP
     0;JMP //JUMP to LOOP
 (END)
-    @END //BREAK PROGRAM
+    @END //Loops Infinitely
     0;JMP

@@ -13,6 +13,7 @@
 
 // Put your code here.
 //implemented using https://github.com/havivha/Nand2Tetris/
+//https://github.com/ReionChan/nand2tetris
 //Page 14
     @status
     M=-1        // status=-1
