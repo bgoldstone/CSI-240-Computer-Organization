@@ -12,13 +12,11 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
-//implemented using https://github.com/havivha/Nand2Tetris/
-//https://github.com/ReionChan/nand2tetris
 //Page 14
     @status
     M=-1        // status=-1
     D=0         // Argument - what to set screen bits to
-    @SETSCREEN
+    @SETSCREEN 
     0;JMP       //GOTO SETSCREEN
 
 (LOOP)
@@ -32,7 +30,7 @@
     @ARG
     M=D         // Save new status arg
     @status     // Status of entire screen
-    D=D-M       // D=newstatus-status
+    D=D-M       // D = newStatus - oldStatus
     @LOOP
     D;JEQ        // Jump if status == 0
     
