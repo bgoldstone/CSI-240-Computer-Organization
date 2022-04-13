@@ -47,7 +47,6 @@ CHIP CPU {
     //op=1 c instruction
     //a=0 A Register
     //a=1 M RAM
-
     
     //c instruction
     Not(in=instruction[15], out=aInstruction);
