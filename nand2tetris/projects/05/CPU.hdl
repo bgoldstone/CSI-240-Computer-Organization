@@ -47,9 +47,8 @@ CHIP CPU {
     Not(in=instruction[15], out=cInstruction);
     //Mux16 instructions
     Mux16(a=outM2, b=instruction, sel=cInstruction, out=aRegister);
-    
     //loadA
-    //instruction 5 D1 means A register
+    //instruction 5 D1 == A register
     Or(a=cInstruction, b=instruction[5], out=loadA);
     // A register
     //out also goes to addressM
