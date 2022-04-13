@@ -40,19 +40,23 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
-    // i  _  _  a  c1 c2 c3 c4 c5 c6 d1 d2 d3 j1 j2 j3
+    // op  _  _ a  c1 c2 c3 c4 c5 c6 d1 d2 d3 j1 j2 j3
     // 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01 00
+    // ac       AM zx nx zy ny  f no A  D  M  LT EQ GT
+    //op=0 a instruction
+    //op=1 c instruction
+    //a=0 A Register
+    //a=1 M RAM
 
+    
     //c instruction
-    Not(in=instruction[15], out=cInstruction);
+    Not(in=instruction[15], out=aInstruction);
     //Mux16 instructions
-    Mux16(a=outM2, b=instruction, sel=cInstruction, out=aRegister);
-    //loadA
-    //instruction 5 D1 == A register
-    Or(a=cInstruction, b=instruction[5], out=loadA);
-    // A register
-    //out also goes to addressM
-    ARegister(in=aRegister, load=loadA, out=aRegisterOut,out[0..14]=addressM);
+    Mux16(a=outM2, b=instruction, sel=aInstruction, out=aRegister);
+    //loadA; instruction 5 D1 == A register
+    Or(a=aInstruction, b=instruction[5], out=loadA);
+    //A register; out also goes to addressM
+    ARegister(in=aRegister, load=loadA, out=aRegisterOut, out[0..14]=addressM);
     //loadD
     And(a=instruction[15], b=instruction[4], out=loadD);
     //D register
@@ -61,7 +65,7 @@ CHIP CPU {
     And(a=instruction[15], b=instruction[12], out=muxSelector);
     //ALU MUX16
     Mux16(a=aRegisterOut, b=inM, sel=muxSelector, out=mux16Out);
-    //writeM, D3 is RAM[A]
+    //writeM, instruction[3] is  is M instruction[15] is a instruction
     And(a=instruction[15], b=instruction[3], out=writeM);
     //ALU computation, two outs: one to outM, and the other as an internal wire
     ALU(x=dRegisterOut, y=mux16Out, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM2, out=outM, zr=zr, ng=ng);
